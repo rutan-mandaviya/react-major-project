@@ -3,9 +3,9 @@ import {  useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { asyncdeleteProduct, asyncupdateProduct } from "../../store/actions/ProductAction";
-
 import axios from "../../api/axiosconfig"
 import { toast } from "react-toastify";
+import useAddcart from "../../utils/useAddcart";
 
 const Productdetail = () => {
   const { id } = useParams();
@@ -43,6 +43,7 @@ const fetchuser=async()=>{
    
   } catch (error) {
 
+    console.log(error);
     
     
   }
@@ -51,6 +52,8 @@ const fetchuser=async()=>{
 useEffect(()=>{
   fetchuser()
 },[])
+const {Addcarthandler}=useAddcart()
+ 
 
 const DeleteHandler = () => {
   const confirmDelete = window.confirm("⚠️ Are you sure you want to delete this product?");
@@ -98,9 +101,14 @@ return oneproduct ? (
 
     <hr className="border-gray-300" />
 
-    <button className="w-fit bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-xl text-base font-semibold transition duration-200 shadow">
+   <div className="flex gap-4">
+   <button className=" w-fit bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-xl text-base font-semibold transition duration-200 shadow">
       {oneproduct.category}
     </button>
+    <button onClick={() => {user ? Addcarthandler(oneproduct) :navigate("/login")}} className="w-fit bg-orange-500 hover:bg-orange-900 text-white px-5 py-2 rounded-xl text-base font-semibold transition duration-200 shadow">
+      Add to cart
+    </button>
+</div>
   </div>
 </div>
 

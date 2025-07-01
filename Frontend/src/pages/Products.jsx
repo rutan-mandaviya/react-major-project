@@ -1,18 +1,21 @@
 import  { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
-import { asyncupdateuser } from '../store/actions/UserAction';
+
 import { toast } from 'react-toastify';
 import DataNotFound from './DataNotFound';
 import axios from '../api/axiosconfig';
 import InfiniteScroll from "react-infinite-scroll-component";
+import useAddcart from '../utils/useAddcart';
 
 
 
 const Products = () => {
 
-  const dispatch=useDispatch()
+
   const navigate=useNavigate()
+
+  const {Addcarthandler}=useAddcart()
   const user = useSelector((state) => state.userReducer.user);
   const [Product, setProduct] = useState([])
   const [hasmore, sethasmore] = useState(true)
@@ -37,30 +40,7 @@ const Products = () => {
     fetchdata()
   },[])
 
-const Addcarthandler=(item)=>{
-  
-  const copyuser={...user,cart:[...user.cart]};
 
-  const x=copyuser.cart.findIndex((c)=>c?.item?.id==item.id)
-  
-  if(x==-1){
-     copyuser.cart.push({item,Quntity:1})
-
-  }
-  else{
-   copyuser.cart[x]={
-    item:item,
-    Quntity:copyuser.cart[x].Quntity + 1
-
-   }
-  }
- 
-  
-  dispatch(asyncupdateuser(copyuser.id,copyuser)) 
- navigate("/cart") 
- toast.success("Product Added Cart !");
-
-}
 
 
  const renderproducts = Product.map((item) => {

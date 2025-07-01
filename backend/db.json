@@ -24,7 +24,7 @@
             "category": "Furniture",
             "image": "https://i.imgur.com/DMQHGA0.jpeg"
           },
-          "Quntity": 1
+          "Quntity": 9
         },
         {
           "item": {
@@ -35,7 +35,18 @@
             "category": "Furniture",
             "image": "https://i.imgur.com/NWIJKUj.jpeg"
           },
-          "Quntity": 1
+          "Quntity": 3
+        },
+        {
+          "item": {
+            "id": "28",
+            "title": "Sleek Modern Leather Sofa",
+            "price": 53,
+            "description": "Enhance the elegance of your living space with our Sleek Modern Leather Sofa. Designed with a minimalist aesthetic, it features clean lines and a luxurious leather finish. The robust metal legs provide stability and support, while the plush cushions ensure comfort. Perfect for contemporary homes or office waiting areas, this sofa is a statement piece that combines style with practicality.",
+            "category": "Furniture",
+            "image": "https://i.imgur.com/Qphac99.jpeg"
+          },
+          "Quntity": 2
         }
       ]
     },

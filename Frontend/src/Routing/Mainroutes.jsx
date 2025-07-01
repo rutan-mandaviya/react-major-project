@@ -3,6 +3,7 @@ import { lazy, useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link,  Route, Routes, useNavigate } from "react-router-dom";
+import AuthadminWrraper from "./AuthadminWrraper";
 
 // Lazy imports
 const Products = lazy(() => import("../pages/Products"));
@@ -100,9 +101,9 @@ const [showSuggestions, setShowSuggestions] = useState(false);
         <Route
           path="/admin/create-product"
           element={
-            <AuthWrraper>
+            <AuthadminWrraper>
               <Createproduct />
-            </AuthWrraper>
+            </AuthadminWrraper>
           }
         />
         <Route
@@ -116,12 +117,17 @@ const [showSuggestions, setShowSuggestions] = useState(false);
         <Route
           path="/product/:id"
           element={
-            <AuthWrraper>
               <Productdetail />
-            </AuthWrraper>
+           
           }
         />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={
+          <AuthWrraper>
+
+          <Cart />
+          </AuthWrraper>
+          
+          } />
         <Route path="*" element={<Pagenotfound />} />
       </Routes>
     </div>

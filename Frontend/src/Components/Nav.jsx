@@ -64,7 +64,7 @@ const navigate=useNavigate()
                 Cart
               </NavLink>
 
-              {user.isadmin && (
+              { user.isadmin && (
                 <NavLink
                   to="/admin/create-product"
                   className={({ isActive }) =>
