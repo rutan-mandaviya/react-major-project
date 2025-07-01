@@ -1,7 +1,7 @@
 import axios from "../../api/axiosconfig";
 import { toast } from "react-toastify";
 import { Loadproducts } from "../reducers/Produtsslic";
-import { removecartFromuser } from "../reducers/Userslic";
+
 import { asyncupdateuser } from "./UserAction";
 
 // ✅ Load all products from backend

@@ -1,11 +1,10 @@
 import axios from "../api/axiosconfig";
-import React, { lazy, useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Link,  Route, Routes, useNavigate } from "react-router-dom";
 
 // Lazy imports
-const Home = lazy(() => import("../pages/Home"));
 const Products = lazy(() => import("../pages/Products"));
 const Nav = lazy(() => import("../Components/Nav"));
 const Login = lazy(() => import("../pages/Login"));
@@ -56,7 +55,7 @@ const [showSuggestions, setShowSuggestions] = useState(false);
 {user &&  <div className="relative w-full max-w-md">
   <input
     onFocus={() => setShowSuggestions(true)}
-    onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+    onBlur={() => setTimeout(() => setShowSuggestions(false), 700)}
     onChange={(e) => setSearchProduct(e.target.value)}
     value={searchproduct}
     type="search"

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncupdateuser } from '../store/actions/UserAction';
 import DataNotFound from './DataNotFound';
@@ -9,15 +8,16 @@ const Cart = () => {
 const user = useSelector((state) => state.userReducer.user);
 
 
-const IncreaseQuantity=(item,index)=>{
+const IncreaseQuantity=(index)=>{
   const copyuser={...user,cart:[...user.cart]};
   copyuser.cart[index]={...copyuser.cart[index],Quntity:copyuser.cart[index].Quntity + 1}
-  console.log(copyuser);
+ 
   
   dispatch(asyncupdateuser(copyuser.id,copyuser)) 
+  // toast.success("Product Added Cart !");
 }
 
-const  DecreaseQuantity=(item,index)=>{
+const  DecreaseQuantity=(index)=>{
   const copyuser={...user,cart:[...user.cart]};
   
   if(user.cart[index].Quntity>1){
@@ -26,7 +26,7 @@ const  DecreaseQuantity=(item,index)=>{
   else{
     copyuser.cart.splice(index,1)
   }
-  console.log(copyuser);
+  
   
   dispatch(asyncupdateuser(copyuser.id,copyuser)) 
 }
@@ -61,7 +61,7 @@ const cartItems=user?.cart.map((c,index)=>
     {/* 🛒 Quantity Controls */}
     <div className="flex justify-center md:justify-start gap-3 items-center">
       <button
-        onClick={() => DecreaseQuantity(c, index)}
+        onClick={() => DecreaseQuantity(index)}
         className="text-2xl bg-gray-300 px-3 py-1 rounded-md"
       >
         −
@@ -72,7 +72,7 @@ const cartItems=user?.cart.map((c,index)=>
       </span>
 
       <button
-        onClick={() => IncreaseQuantity(c, index)}
+        onClick={() => IncreaseQuantity(index)}
         className="text-2xl bg-gray-300 px-3 py-1 rounded-md"
       >
         +

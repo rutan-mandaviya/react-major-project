@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { asyncupdateuser } from '../store/actions/UserAction';
@@ -6,8 +6,7 @@ import { toast } from 'react-toastify';
 import DataNotFound from './DataNotFound';
 import axios from '../api/axiosconfig';
 import InfiniteScroll from "react-infinite-scroll-component";
-import { distance2D } from 'motion/react';
-import { set } from 'react-hook-form';
+
 
 
 const Products = () => {
@@ -30,15 +29,13 @@ const Products = () => {
       setProduct([...Product,...data])
       
     } catch (error) {
-      console.log(error);
+      toast.error("Invalid move");
       
     }
   }
   useEffect(()=>{
     fetchdata()
   },[])
-// const Product = useSelector((state) => state.productsReducer.Product);
-
 
 const Addcarthandler=(item)=>{
   
@@ -61,6 +58,7 @@ const Addcarthandler=(item)=>{
   
   dispatch(asyncupdateuser(copyuser.id,copyuser)) 
  navigate("/cart") 
+ toast.success("Product Added Cart !");
 
 }
 

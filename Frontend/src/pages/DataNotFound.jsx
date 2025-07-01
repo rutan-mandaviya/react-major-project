@@ -1,4 +1,3 @@
-import React from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
 
 const DataNotFound = () => {

@@ -1,8 +1,6 @@
 import axios from "../../api/axiosconfig";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Loaduser, removeuser } from "../reducers/Userslic";
-import { lazy } from "react";
-
 
 
 export const asyncCurrentUser = () => async (dispatch, getState) => {
@@ -26,7 +24,7 @@ export const asyncLogoutuser = () => async (dispatch, getState) => {
   }
 };
 
-export const asyncLoginDetails = (user,navigate) => async (dispatch, getState) => {
+export const asyncLoginDetails = (user,navigate,setloginerror) => async (dispatch, getState) => {
  
   try {
     const { data } = await axios.get(
@@ -34,14 +32,18 @@ export const asyncLoginDetails = (user,navigate) => async (dispatch, getState) =
     );
 
 
+    
     if (data.length > 0) {
       localStorage.setItem("users", JSON.stringify(data[0]));
+    
+      
       dispatch(Loaduser(data[0]));
+      toast.success("Login Succesfull",{autoClose:1000})
       navigate("/")
       
 
     } else {
-      toast.error("Invalid email or password");
+      setloginerror("Invaild Username and password");
     }
 
   } catch (error) {
@@ -64,7 +66,7 @@ export const asyncupdateuser = (id,users) => async (dispatch, getState) => {
   
     localStorage.setItem("users", JSON.stringify(data));
      dispatch(asyncCurrentUser(users))
-    toast.success("user Update successfully!");
+    
   } catch (error) {
     toast.error(error.message || "Failed to create product");
   }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { asyncdeleteUser, asyncLogoutuser, asyncupdateuser } from '../store/actions/UserAction';
 import { motion } from "motion/react"
+import {toast} from "react-toastify";
 const Userprofile = () => {
     const { id } = useParams();
     const navigate=useNavigate()
@@ -11,7 +12,7 @@ const Userprofile = () => {
    
 //   const products = useSelector((state) => state.productsReducer.Product);
   const user = useSelector((state) => state.userReducer.user);
-console.log(user);
+
       
   const { register, handleSubmit,reset } = useForm();
    useEffect(() => {
@@ -31,8 +32,15 @@ const updateuserHandler = (users) => {
   
 };
 const DeleteuserHandler = () => {
-  dispatch(asyncdeleteUser(user.id));
-  navigate("/login")
+   const confirmDelete = window.confirm("⚠️ Are you sure you want to delete this user?");
+  if (confirmDelete) {
+    dispatch(asyncdeleteUser(user.id));
+    navigate("/login")
+
+  } else {
+    // ❌ Cancelled
+    toast.info("User not deleted");
+  }
 };
 const Logouthandle=()=>{
     dispatch(asyncLogoutuser())

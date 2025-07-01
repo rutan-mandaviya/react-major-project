@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
+import  { useEffect, useState } from "react";
+import {  useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { asyncCreateProduct, asyncdeleteProduct, asyncupdateProduct } from "../../store/actions/ProductAction";
-import { toast } from "react-toastify";
+import { asyncdeleteProduct, asyncupdateProduct } from "../../store/actions/ProductAction";
+
 import axios from "../../api/axiosconfig"
+import { toast } from "react-toastify";
 
 const Productdetail = () => {
   const { id } = useParams();
@@ -41,19 +42,26 @@ const fetchuser=async()=>{
    setusers(data);
    
   } catch (error) {
-    console.log(error);
+
     
     
   }
 }
-console.log(users);
 
 useEffect(()=>{
   fetchuser()
 },[])
 
 const DeleteHandler = () => {
-  dispatch(asyncdeleteProduct(id,users));
+  const confirmDelete = window.confirm("⚠️ Are you sure you want to delete this product?");
+  if (confirmDelete) {
+      dispatch(asyncdeleteProduct(id,users));
+    
+  
+    } else {
+    
+      toast.info("User not deleted");
+    }
   
   navigate("/")
 };

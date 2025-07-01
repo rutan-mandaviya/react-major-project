@@ -1,5 +1,4 @@
 import { nanoid } from "@reduxjs/toolkit";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,8 +11,6 @@ const Createproduct = () => {
 
   const productHandler = (product) => {
     product.id = nanoid();
-
-    console.log(product);
     navigate("/products");
     dispatch(asyncCreateProduct(product));
     navigate("/")
